@@ -12,6 +12,8 @@ app.get("/", (req, res) => {
   try {
     if (!req.query.url) return res.send("Specify 'url' query parameter to cache the image");
 
+    res.set("Cache-Control", "public, max-age=999999");
+
     const fileDir = join(__dirname, "images", encodeURIComponent(req.query.url));
 
     if (fs.existsSync(join(__dirname, "images", encodeURIComponent(req.query.url)))) {
